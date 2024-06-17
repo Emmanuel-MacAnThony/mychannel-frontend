@@ -6,9 +6,8 @@ import {
 } from "react-router-dom";
 import Home from "./features/home/Home";
 import React from "react";
-import { ThemeProvider } from "@mui/material";
-import createMuiTheme from "./theme/theme";
 import Explore from "./features/home/Explore";
+import ToggleColorMode from "./components/ToggleColorMode";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,11 +19,10 @@ const router = createBrowserRouter(
 );
 
 const App: React.FC = () => {
-  const theme = createMuiTheme();
   return (
-    <ThemeProvider theme={theme}>
+    <ToggleColorMode>
       <RouterProvider router={router} />
-    </ThemeProvider>
+    </ToggleColorMode>
   );
 };
 

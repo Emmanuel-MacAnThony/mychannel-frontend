@@ -41,7 +41,7 @@ const ExploreCategories = () => {
     return <Box>Loading...</Box>;
   }
 
-  console.log(data, "datacat");
+  const isDarkMode = theme.palette.mode === "dark" ? true : false;
 
   return (
     <>
@@ -91,6 +91,7 @@ const ExploreCategories = () => {
                           height: "25px",
                           display: "block",
                           margin: "auto",
+                          filter: isDarkMode ? "invert(100%)" : "none",
                         }}
                       />
                     </ListItemAvatar>

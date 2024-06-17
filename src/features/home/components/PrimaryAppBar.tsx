@@ -11,11 +11,29 @@ import {
 import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import React, { useEffect, useState } from "react";
+import ExploreCategories from "./ExploreCategories";
+import AccountButton from "./AccountButton";
 
 const PrimaryAppBar = () => {
   const theme = useTheme();
   const [sideMenu, setSideMenu] = useState<boolean>(false);
   const isSmallScreen = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const list = () => {
+    return (
+      <Box
+        sx={{
+          paddingTop: `${theme.primaryAppBar.height}px`,
+          minWidth: 200,
+        }}
+        onClick={toggleDrawer(false)}
+        onKeydown={toggleDrawer(false)}
+        role="presentation"
+      >
+        <ExploreCategories />
+      </Box>
+    );
+  };
 
   useEffect(() => {
     if (isSmallScreen && sideMenu) {
@@ -62,27 +80,33 @@ const PrimaryAppBar = () => {
           </IconButton>
         </Box>
         <Drawer anchor="left" open={sideMenu} onClose={toggleDrawer(false)}>
-          {[...Array(100)].map((_, i) => {
-            return (
-              <Typography key={i} paragraph>
-                {i + 1}
-              </Typography>
-            );
-          })}
+          {list()}
         </Drawer>
-        <Link href="/" underline="none" color={"inherit"}>
-          <Typography
-            variant="h6"
-            noWrap
-            component={"div"}
-            sx={{
-              fontWeight: 700,
-              letterSpacing: "-0.5px",
-            }}
-          >
-            CHANNELCHAT
-          </Typography>
-        </Link>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <Link href="/" underline="none" color={"inherit"}>
+            <Typography
+              variant="h6"
+              noWrap
+              component={"div"}
+              sx={{
+                fontWeight: 700,
+                letterSpacing: "-0.5px",
+              }}
+            >
+              CHANNELCHAT
+            </Typography>
+          </Link>
+          <Box>
+            <AccountButton />
+          </Box>
+        </Box>
       </Toolbar>
     </AppBar>
   );
